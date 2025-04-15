@@ -1,131 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <base href="/">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Demonstration for portfolio-sidebar-theme">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <!-- Basic resets and default styles -->
   <style>
-    :root, html, body {
+    html, body {
       margin: 0;
       padding: 0;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #fff; /* White background to match comp */
     }
-    #demo {
-      margin: var(--ddd-spacing-2);
+    /* Force smooth scrolling in modern browsers */
+    html {
+      scroll-behavior: smooth;
     }
-    portfolio-sidebar-theme {
-      margin: var(--ddd-spacing-2);
-      border: var(--ddd-border-md);
-      border-radius: var(--ddd-radius-lg);
+
+    /* 
+      Override the sidebar’s default dark gray to match the navy-ish 
+      color in your screenshot (#2E3A59 is an example) 
+    */
+    portfolio-sidebar-theme .sidebar {
+      background: #2E3A59 !important; /* override default #333 */
     }
-    portfolio-sidebar-theme:hover {
-      box-shadow: var(--ddd-boxShadow-sm);
+    
+    /* Make the anchor links in the sidebar bigger / spaced out */
+    portfolio-sidebar-theme .sidebar a {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
     }
-    #example {
-      --portfolio-sidebar-theme-font-size: var(--ddd-font-size-l);
-      background-color: var(--ddd-accent-2);
-      color: var(--ddd-primary-17);
+    
+    /* 
+      We wrap each “screen” section in <portfolio-screen> 
+      OR regular <section> tags inside your <portfolio-sidebar-theme>.
+      Each one should fill the viewport.
+    */
+    .screen {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      box-sizing: border-box;
+      /* Use padding to create space for content */
+      padding: 20px 30px;
+    }
+
+    /* 
+      HERO SECTION 
+      Displayed first: includes your logo, “Professional” text, 
+      and a large “PORTFOLIO” heading
+    */
+    #home {
+      background: #fff; /* White background */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #home .logo {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    #home h1 {
+      font-size: 2rem;
+      margin: 0.2rem 0;
+    }
+    #home h2 {
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: 0.1rem;
+    }
+    
+    /* 
+      The WAVE that separates the hero from the "About" content 
+      We position it at the bottom of #home.
+    */
+    #home .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: calc(100% - 200px); /* subtract sidebar width if you like */
+      /* push it behind the content in #home */
+      z-index: -1;
+    }
+
+    /*
+      ABOUT SECTION
+      Placed directly under the hero wave. 
+      We place the portrait image on the bottom-left 
+      and text on the bottom-right, simulating your comp.
+    */
+    #about {
+      background: #fff; /* white section after wave */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+    }
+    /* Container for the about text + headshot */
+    .about-content {
+      width: 80%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 250px auto; /* image on the left, text on the right */
+      gap: 2rem;
+      align-items: end; /* image bottom aligns with text bottom */
+    }
+    .about-content img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      justify-self: center;
+      align-self: end;
+    }
+    .about-text {
+      align-self: end;
+      margin-bottom: 30px; /* so it lines up with the image bottom */
+    }
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    /* Additional screens: CV, Research, Contact. 
+       Different background colors if desired. 
+       Each screen is just a placeholder here.
+    */
+    #cv {
+      background: #efefef;
+    }
+    #research {
+      background: #F5F5F5;
+    }
+    #contact {
+      background: #FCFCFC;
+    }
+
+    /* 
+      Scroll-to-top button style 
+      (You could also use a custom web component here.)
+    */
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: #555;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 45px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      z-index: 9999;
+    }
+    .scroll-top:hover {
+      opacity: 1;
     }
   </style>
-  <title>portfolio-sidebar-theme</title>
 </head>
-
 <body>
-  <div id="demo">
-    <h1>portfolio-sidebar-theme</h1>
-    <!-- this is going to do whatever the tag's defaults are -->
-    <h2>Default</h2>
-    <portfolio-sidebar-theme></portfolio-sidebar-theme>
-    <h2>Slot usage</h2>
-    <portfolio-sidebar-theme data-accent="2" data-primary="17"><div>Sample slot content</div></portfolio-sidebar-theme>
-    <h2>Property usage</h2>
-    <portfolio-sidebar-theme id="example" title="Sample property title"></portfolio-sidebar-theme>
-  </div>
-  <script type="module" src="./portfolio-sidebar-theme.js"></script>
+  <!-- 
+    Wrap everything in your portfolio-sidebar-theme component.
+    The automatically generated sidebar will appear on the left. 
+    The custom logic in your updated JS file will detect these “screens” 
+    and link to them by ID. 
+  -->
+  <portfolio-sidebar-theme title="Portfolio">
+    <!-- Hero screen: HOME -->
+    <portfolio-screen id="home" title="HOME" class="screen">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKctmIIWkkihUB0T5n6A5BSl0ZFR8UAEGvTg&s" alt="Logo" class="logo" />
+      <h1>Professional</h1>
+      <h2>PORTFOLIO</h2>
+    </portfolio-screen>
 
-  <!-- Take HAX, the Web and you further down the rabbit hole -->
-  <style>
-    #follow-the-white-rabbit {
-      margin: var(--ddd-spacing-4) auto 64px  16px;
-      background-color: var(--ddd-accent-4);
-      color: black;
-    }
-    #follow-the-white-rabbit[open] summary {
-      background-color: var(--ddd-accent-4) !important;
-      color: black;
-    }
-    #follow-the-white-rabbit[open] .content {
-      padding: 0 var(--ddd-spacing-4);
-    }
-    #follow-the-white-rabbit ul,
-    #follow-the-white-rabbit li {
-      padding: 0;
-      margin: 0;
-    }
-    #follow-the-white-rabbit li {
-      font-size: var(--ddd-font-size-xs);
-      list-style: none;
-    }
-    #follow-the-white-rabbit li strong,
-    #follow-the-white-rabbit li a {
-      padding: var(--ddd-spacing-2) var(--ddd-spacing-4);
-      color: black;
-      display: block;
-      font-weight: bold;
-    }
-    #follow-the-white-rabbit li:focus-within a,
-    #follow-the-white-rabbit li:hover a {
-      background-color: black;
-      color: yellow;
-    }
-  </style>
-  <details id="follow-the-white-rabbit" open>
-    <summary>How to Develop</summary>
-    <div class="content">
+    <!-- About screen -->
+    <portfolio-screen id="about" title="About" class="screen">
+      <div class="about-content">
+        <!-- Example user headshot -->
+        <img src="https://i.pinimg.com/236x/cc/33/21/cc3321c1e2fe520856701800277bed62.jpg" alt="User Headshot">
+        <div class="about-text">
+          <h3>About Me</h3>
+          <p>Brief professional bio: research focus, academic background, key achievements, professional headshot, concise mission statement, or research interests. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+    </portfolio-screen>
+
+    <!-- CV screen -->
+    <portfolio-screen id="cv" title="CV" class="screen">
+      <h1>Curriculum Vitae</h1>
+      <p>Show your education, experience, skills, etc.</p>
+    </portfolio-screen>
+
+    <!-- Research screen -->
+    <portfolio-screen id="research" title="Research" class="screen">
+      <h1>Research</h1>
+      <p>Highlight your research topics, publications, interests.</p>
+    </portfolio-screen>
+
+    <!-- Contact screen -->
+    <portfolio-screen id="contact" title="Contact" class="screen">
+      <h1>Contact</h1>
       <p>
-      
-        <strong>Checkout project on github:</strong> <a href="https://github.com/ProdByBobo/portfolio-sidebar-theme" target="_blank" rel="nofollow">ProdByBobo/portfolio-sidebar-theme</a>
-        
+        <strong>Email:</strong> <a href="mailto:you@example.com">you@example.com</a>
       </p>
-      <p>
-        You can edit the current page by modifying <code>index.html</code><br />
-        To edit your <strong>portfolio-sidebar-theme</strong> tag, modify <code>src/portfolio-sidebar-theme.js</code>.
-        This file contains all the HTML, CSS and JavaScript used to render your elements above!
-      </p>
-      <p>
-        Web components are easy to follow once you get used to their pattern.
-        Below are links to help on your journey. Good luck, we need you!
-      </p>
-      <ul>
-        <li><a href="https://haxtheweb.org/documentation/ddd" target="_blank">🧑‍🎨 Learn DDD HAX Design system</a></li>
-        <li><a href="https://lit.dev/playground/" target="_blank" rel="nofollow">🔥 Learn Lit</a></li>
-        <li><a href="https://hax.psu.edu" target="_blank">🧙 HAX The Web @ Penn State</a></li>
-      </ul>
-      <h2>Join and Share HAX</h2>
-      <ul>
-        <li><a href="https://github.com/haxtheweb/issues/issues" target="_blank" rel="nofollow">🔮 Ideas to HAX Harder, Better, Faster, Stronger</a></li>
-        <li><a href="https://bit.ly/hax-the-linkedin" target="_blank" rel="nofollow">👔 Share on LinkedIn</a></li>
-        <li><a href="https://bit.ly/hax-the-x" target="_blank" rel="nofollow">🧵 Tweet on X</a></li>
-        <li><a href="https://bit.ly/hax-discord" target="_blank" rel="nofollow">💬 Join Community</a></li>
-      </ul>
-      <h2>Learn the languages and tools</h2>
-      <ul>
-        <li><a href="https://w3schools.com" target="_blank" rel="nofollow">🌐 Learn HTML</a></li>
-        <li><a href="https://web.dev/learn/css/" target="_blank" rel="nofollow">🎨 Learn CSS</a></li>
-        <li><a href="http://Javascript.info" target="_blank" rel="nofollow">💻 Learn JavaScript (JS)</a></li>
-        <li><a href="https://gitimmersion.com" target="_blank" rel="nofollow">🦺 Learn Git / Github</a></li>
-        <li><a href="https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/" target="_blank" rel="nofollow">📦 Learn NPM</a></li>
-        <li><a href="http://learnux.io" target="_blank" rel="nofollow">📐 Learn UX / UI development</a></li>
-      </ul>
-      <h2>Find purpose and inspiration</h2>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=eC7xzavzEKY" target="_blank" rel="nofollow">🐟 This is Water - David Foster Wallace</a></li>
-        <li><a href="https://www.youtube.com/watch?v=kYfNvmF0Bqw" target="_blank" rel="nofollow">🏗️ Secrets of Life - Steve Jobs</a></li>
-        <li><strong>💡 <em>Never. Stop. Innovating.</em></strong></li>
-      </ul>
-    </div>
-  </details>
+      <p>You can embed a Google Form here if desired.</p>
+    </portfolio-screen>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTopBtn">↑</div>
+  </portfolio-sidebar-theme>
+
+  <!-- Load your updated sidebar JS logic -->
+  <script type="module" src="portfolio-sidebar-theme.js"></script>
+  <script>
+    // Simple "scroll back to top" action
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
