@@ -110,6 +110,15 @@
       gap: 2rem;
       align-items: end; /* image bottom aligns with text bottom */
     }
+    /* Add spacing between navigation items */
+.nav-links a {
+  margin-right: 20px; /* Adjust the value to increase spacing */
+  text-decoration: none;
+}
+
+.nav-links a:last-child {
+  margin-right: 0; /* Remove margin for the last item */
+}
     .about-content img {
       border-radius: 50%;
       width: 150px;
@@ -190,10 +199,10 @@
     <portfolio-screen id="about" title="About" class="screen">
       <div class="about-content">
         <!-- Example user headshot -->
-        <img src="https://attachments-cdn-s.coub.com/coub_storage/coub/simple/cw_image/1f680efaf7d/af95ff1109cf6d9e33ab0/1581013763_00021.jpg" alt="User Headshot">
+        <img src="https://i.pinimg.com/236x/cc/33/21/cc3321c1e2fe520856701800277bed62.jpg" alt="User Headshot">
         <div class="about-text">
           <h3>About Me</h3>
-          <p>Hello, I am under the water, please help me. I am drowning</p>
+          <p>Brief professional bio: research focus, academic background, key achievements, professional headshot, concise mission statement, or research interests. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
     </portfolio-screen>
@@ -216,7 +225,20 @@
       <p>
         <strong>Email:</strong> <a href="mailto:you@example.com">you@example.com</a>
       </p>
-      <p>You can embed a Google Form here if desired.</p>
+      <!-- Add this under the Contact section -->
+<section id="contact">
+  <h2>Contact</h2>
+  <!-- Embed Google Form -->
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSemufOM3ARM3cQmnkR6EXVA__3kZBYRMLhjmktbCXJz6Bpxew/viewform?usp=header" 
+    width="100%" 
+    height="800" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
+    Loading…
+  </iframe>
+</section>
     </portfolio-screen>
 
     <!-- Scroll to top button -->
