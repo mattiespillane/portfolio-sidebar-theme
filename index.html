@@ -8,7 +8,7 @@
   <style>
     html, body {
       margin: 0;
-      padding: 0;
+      padding: 10px;
       font-family: 'Arial', sans-serif;
       overflow-x: hidden;
       height: 100%;
@@ -144,15 +144,33 @@
        Different background colors if desired. 
        Each screen is just a placeholder here.
     */
-    #cv {
+    #resume {
       background: #efefef;
     }
-    #research {
+    #resume h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    #projects {
       background: #F5F5F5;
+      text-align: center;
+    }
+
+    #projects h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      
+    }
+    #projects img {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 20px;
     }
     #contact {
       background: #FCFCFC;
     }
+    
 
     /* 
       Scroll-to-top button style 
@@ -208,22 +226,57 @@
     </portfolio-screen>
 
     <!-- CV screen -->
-    <portfolio-screen id="cv" title="CV" class="screen">
-      <h1>Curriculum Vitae</h1>
-      <p>Show your education, experience, skills, etc.</p>
+    <portfolio-screen id="resume" title="Resume" class="screen">
+      <h1>Resume</h1>
+      <p>My education, experience, skills, etc.</p>
+      <p>Education: 
+        <ul>
+          <li>Penn State University, B.S. in Information Sciences and Technology</li>
+        </ul>
+      </p>
+      <p>Experience: 
+        <ul>
+          <li>TechTrend Internship (May 2024 - July 2024)</li>
+          <ul>
+            <li>Established understanding BI dashboard creation with Power BI without AI</li>
+            <li>Plugged in Google AI and Open AI with ChatGPT to create Power BI dashboard</li>
+            <li>Worked on two minimum dashboard creations with roles separation. Excel scenarios were provided: Accounting, Contracts, HR hiring, Operational. </li>
+            <li>Learned and developed projects on Power BI</li>
+            <li>Worked with a team of 4 to create a chatbot with given API key. We used python, html, and css to create a working chatbot with that API key.</li>
+            <li>Achieved certification on the below:</li>
+            <ul>
+              <li>Github Foundations (June 2024)</li>
+              <li>Azure AI AI900 Certification (July 2024)</li>
+              </ul>
+          </ul>
+        </ul>
+      </p>
+      <p>Skills: 
+        <ul>
+          <li>Programming Languages: Python, Java, Haskell</li>
+          <li>Web Development: HTML, CSS, JavaScript</li>
+          <li>Data Analysis: SQL</li>
+        </ul>
+      </p>
+      <p>Download my Resume: <a href="https://docs.google.com/document/d/1s2qKH7bfZCm_kI6ayU3IO6KMc0H-MJAv/edit?usp=sharing&ouid=100039467660185530882&rtpof=true&sd=true">Resume</a></p>
+      <p>Link to Linkedin: <a href="https://www.linkedin.com/in/arman-amir/">Linkedin</a></p>
+      <p>Link to Github: <a hfref="https://github.com/ProdByBobo">Github</a></p>
     </portfolio-screen>
 
     <!-- Research screen -->
-    <portfolio-screen id="research" title="Research" class="screen">
-      <h1>Research</h1>
-      <p>Highlight your research topics, publications, interests.</p>
+    <portfolio-screen id="projects" title="Projects" class="screen">
+      <h1>Projects</h1>
+      <p>Here are the projects that I have worked on.</p>
+      <img src="IST250Portfolio.png" alt=" IST250 Portfolio" style="width: 100%; max-width: 1000px; margin-bottom: 20px;" />
+      <p>IST 250 Portfolio: This is a portfolio that I created for my IST 250 class. It showcases my skills and projects.</p>
+      <a href="https://ist-250-practice-activity-4-hosted-portfolio.vercel.app/" download>Link to IST 250 Portfolio</a>
     </portfolio-screen>
 
     <!-- Contact screen -->
     <portfolio-screen id="contact" title="Contact" class="screen">
       <h1>Contact</h1>
       <p>
-        <strong>Email:</strong> <a href="mailto:you@example.com">ama8745@psu.edu</a>
+        <strong>Email:</strong> <a href="mailto:ama8745@psu.edu">ama8745@psu.edu</a>
       </p>
       <!-- Add this under the Contact section -->
 <section id="contact">
