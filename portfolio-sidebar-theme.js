@@ -39,6 +39,30 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       locales: ["ar", "es", "hi", "zh"],
     });
   }
+  connectedCallback() {
+    super.connectedCallback();
+
+    // Scroll-to-top button logic
+    const scrollBtn = document.getElementById('scrollTopBtn');
+
+    if (scrollBtn) {
+      // Show or hide the button based on scroll position
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollBtn.style.display = 'block';
+        } else {
+          scrollBtn.style.display = 'none';
+        }
+      });
+
+      // Scroll to the top when the button is clicked
+      scrollBtn.addEventListener('click', () => {
+        console.log('Button clicked!'); // Debugging
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+  
 
   // Define reactive properties including sidebarLinks (an array of link objects)
   static get properties() {
@@ -155,6 +179,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       }
     });
   }
+  
 
   /**
    * haxProperties integration via file reference

@@ -12,7 +12,7 @@
       font-family: 'Arial', sans-serif;
       overflow-x: hidden;
       height: 100%;
-      background-color: #fff; /* White background to match comp */
+      background-color: var(--ddd-theme-default-potential0); /* White background to match comp */
     }
     /* Force smooth scrolling in modern browsers */
     html {
@@ -24,7 +24,7 @@
       color in your screenshot (#2E3A59 is an example) 
     */
     portfolio-sidebar-theme .sidebar {
-      background: #2E3A59 !important; /* override default #333 */
+      background: var(--ddd-theme-default-nittanyNavy) !important; /* override default #333 */
     }
     
     /* Make the anchor links in the sidebar bigger / spaced out */
@@ -53,7 +53,8 @@
       and a large “PORTFOLIO” heading
     */
     #home {
-      background: #fff; /* White background */
+      background: var(--ddd-theme-default-nittanyNavy);
+      color: #fff; /* white text */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -146,6 +147,7 @@
     */
     #resume {
       background: #efefef;
+      color: #041E42;
     }
     #resume h1 {
       font-size: 2rem;
@@ -182,7 +184,7 @@
       right: 20px;
       width: 45px;
       height: 45px;
-      background: #555;
+      background: #000000;
       color: #fff;
       border-radius: 50%;
       text-align: center;
@@ -196,6 +198,7 @@
     .scroll-top:hover {
       opacity: 1;
     }
+    
   </style>
 </head>
 <body>
@@ -207,7 +210,7 @@
   -->
   <portfolio-sidebar-theme title="Portfolio">
     <!-- Hero screen: HOME -->
-    <portfolio-screen id="home" title="HOME" class="screen">
+    <portfolio-screen id="home" title="Home" class="screen">
       <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Penn_State_Nittany_Lions_logo.svg/1200px-Penn_State_Nittany_Lions_logo.svg.png" alt="Logo" class="logo" />
       <h1>Mani Amir's Professional</h1>
       <h2>Portfolio</h2>
@@ -295,17 +298,13 @@
     </portfolio-screen>
 
     <!-- Scroll to top button -->
-    <div class="scroll-top" id="scrollTopBtn">↑</div>
+<div class="scroll-top" id="scrollTopBtn" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; background: #041E42; color: white; padding: 10px; border-radius: 100px; z-index: 1000;">
+  ↑
+</div>
   </portfolio-sidebar-theme>
 
   <!-- Load your updated sidebar JS logic -->
   <script type="module" src="portfolio-sidebar-theme.js"></script>
-  <script>
-    // Simple "scroll back to top" action
-    const scrollBtn = document.getElementById('scrollTopBtn');
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
+  
 </body>
 </html>
