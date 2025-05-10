@@ -7,15 +7,6 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import '@haxtheweb/scroll-button/scroll-button.js';
 
-/**
- * `portfolio-sidebar-theme`
- * 
- * This component wraps the page’s content and auto-generates a fixed sidebar
- * with navigation links based on slotted <portfolio-screen> elements.
- *
- * @demo index.html
- * @element portfolio-sidebar-theme
- */
 export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
@@ -42,11 +33,9 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   connectedCallback() {
     super.connectedCallback();
 
-    // Scroll-to-top button logic
     const scrollBtn = document.getElementById('scrollTopBtn');
 
     if (scrollBtn) {
-      // Show or hide the button based on scroll position
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
           scrollBtn.style.display = 'block';
@@ -55,7 +44,6 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         }
       });
 
-      // Scroll to the top when the button is clicked
       scrollBtn.addEventListener('click', () => {
         console.log('Button clicked!'); // Debugging
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -63,8 +51,6 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     }
   }
   
-
-  // Define reactive properties including sidebarLinks (an array of link objects)
   static get properties() {
     return {
       ...super.properties,
